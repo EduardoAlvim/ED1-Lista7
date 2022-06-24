@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 /*Dado  uma  pilha  que  armazene números,  escreva  uma  função para  ordenar  os valores desta pilha em ordem crescente. */
 
@@ -8,47 +9,60 @@ struct stack
     char dados[10];
 };
 
-int ordena(struct stack *pilha, struct stack *ordenada){
+int ordena(struct stack *pilha, struct stack *ordenada)
+{
     struct stack aux;
     aux.topo=-1;
-    empilha(desempilha(&*pilha),&*ordenada);
-    while(pilha->topo != -1){
-        int x;
-        x=desempilha(&*pilha);
-        if(x<ordenada->dados[ordenada->topo]){
-            empilha(desempilha(&*ordenada),&aux);
-            empilha(x,&*ordenada);
+    empilha(desempilha(&*pilha),&aux);
+    int x;
+    x=desempilha(&*pilha);
+    while(pilha->topo != -1)
+    {
+        if(x<aux->dados[aux->topo])
+        {
+            empilha(x,&aux);
+            x=desempilha(&*pilha);
         }
-        else{
+        else
+        {
             empilha(x,&*ordenada);
         }
     }
-    if(ordenada->topo==9){
+    if(ordenada->topo==9)
+    {
         return 0;
     }
-    else{
-    while(pilha->topo != 9){
-        int x;
-        x=desempilha(&aux);
-        if(x<ordenada->dados[ordenada->topo]){
-            empilha(desempilha(&*ordenada),&*pilha);
-            empilha(x,&*ordenada);
+    else
+    {
+        while(pilha->topo != 9)
+        {
+            int x;
+            x=desempilha(&aux);
+            if(x<ordenada->dados[ordenada->topo])
+            {
+                empilha(desempilha(&*ordenada),&*pilha);
+                empilha(x,&*ordenada);
+            }
+            else
+            {
+                empilha(x,&*ordenada);
+            }
+            while(pilha->topo != -1)
+            {
+                int x;
+                x=desempilha(&*pilha);
+                if(x<ordenada->dados[ordenada->topo])
+                {
+                    empilha(desempilha(&*ordenada),&aux);
+                    empilha(x,&*ordenada);
+                }
+                else
+                {
+                    empilha(x,&*ordenada);
+                }
+            }
         }
-        else{
-            empilha(x,&*ordenada);
-        }
-        while(pilha->topo != -1){
-        int x;
-        x=desempilha(&*pilha);
-        if(x<ordenada->dados[ordenada->topo]){
-            empilha(desempilha(&*ordenada),&aux);
-            empilha(x,&*ordenada);
-        }
-        else{
-            empilha(x,&*ordenada);
-        }
-    }
-    }
+        return 0;
     }
 }
 
@@ -87,13 +101,15 @@ void main()
     pilha.topo=-1;
     ordenada.topo=-1;
     int valor;
-    for(int i=0;i<10;i++){
+    for(int i=0; i<10; i++)
+    {
         printf("\nDigite um numero: ");
-        scanf("%d",valor);
+        scanf("%d",&valor);
         empilha(valor,&pilha);
     }
     ordena(&pilha,&ordenada);
-    for(int i=0;i<10;i++){
+    for(int i=0; i<10; i++)
+    {
         printf("\n%d",ordenada.dados[i]);
     }
 }
