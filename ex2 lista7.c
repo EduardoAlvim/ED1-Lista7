@@ -51,24 +51,33 @@ void main()
     printf("\nDigite a frase: ");
     gets(palavra);
     fflush(stdin);
-    for(int i=0; i<strlen(palavra); i++)
+    for(int i=0; i<=strlen(palavra); i++)
     {
         if(palavra[i] !=' ' && palavra[i] != '\0')
         {
             empilha(palavra[i],&pilha);
             cont++;
         }
-        else
+        else if(palavra[i]== ' ')
         {
-            if(palavra[i]==' ')
-            {
-                empilha(palavra[i],&pilha);
-                cont++;
-            }
+            
+            empilha(palavra[i],&pilha);
+            cont++;
+            
             for(int j=strlen(str2); j<cont; j++)
             {
                 str2[j]=desempilha(&pilha);
-            }
+            
+        }
+        }
+        else if(palavra[i]=='\0'){
+            str2[strlen(str2)+1]=' ';
+            for(int j=strlen(str2); j<cont; j++)
+            {
+                str2[j]=desempilha(&pilha);
+            
+        }
+        str2[strlen(str2)+1]='\0';
         }
     }
     printf("\nFrase normal: %s\nFrase invertida: %s",palavra,str2);
