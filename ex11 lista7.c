@@ -15,6 +15,9 @@ void copiar(struct stack pilha, struct stack *copia){
     for(int i=0;i<5;i++){
         empilha(desempilha(&aux),&*copia);
     }
+    for(int i=0;i<5;i++){
+        printf("\n %d",copia->dados[i]);
+    }
 }
 
 void empilha (int x, struct stack *pilha)
@@ -62,3 +65,4 @@ void main()
         printf("\n%d",copia.dados[i]);
     }
 }
+
