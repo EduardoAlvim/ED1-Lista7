@@ -72,7 +72,8 @@ void main()
         }
         else if(palavra[i]=='\0')
         {
-            str2[strlen(str2)+1]=' ';
+            empilha(' ',&pilha);
+            cont++;
             for(int j=strlen(str2); j<cont; j++)
             {
                 str2[j]=desempilha(&pilha);
